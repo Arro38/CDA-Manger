@@ -1,4 +1,6 @@
 <?php
+define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http") .
+    "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
 require_once "controllers/RepasController.controller.php";
 if (empty($_GET['page'])) {
     require "views/accueil.views.php";
@@ -20,7 +22,9 @@ if (empty($_GET['page'])) {
             } else if ($url[1] === "voir") {
                 $repasController->afficherUnRepas($url[2]);
             } else if ($url[1] === "ajouter") {
-                // $repasController->ajouteRepas();
+                $repasController->ajoutRepas();
+            } else if ($url[1] === "ajoutValidation") {
+                $repasController->ajoutRepasValidation();
             } else if ($url[1] === "modifier") {
                 echo "modifier un repas";
             } else if ($url[1] === "supprimer") {
