@@ -6,12 +6,15 @@ class Repas
     private $stock;
     private $image;
 
+    static $repass;
+
     public function __construct($id, $nom, $stock, $image)
     {
         $this->id = $id;
         $this->nom = $nom;
         $this->stock = $stock;
         $this->image = $image;
+        self::$repass[] = $this;
     }
     public function getId()
     {
