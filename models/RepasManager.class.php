@@ -36,6 +36,21 @@ class RepasManager extends Model
         }
     }
 
+    public function suppressionRepasBD($id)
+    {
+        $req = "
+        Delete from repas where id = :idRepas
+        ";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":idRepas", $id, PDO::PARAM_INT);
+        $resultat = $stmt->execute();
+        $stmt->closeCursor();
+        if ($resultat > 0) {
+            $repas = $this->getRepasById($id);
+            unset($repas);
+        }
+    }
+
     public function ajoutRepasBd($nom, $stock, $image)
     {
         $req = " INSERT INTO repas (nom, stock, image) values (:nom, :stock, :image)";
@@ -49,5 +64,20 @@ class RepasManager extends Model
             $repas = new Repas($this->getBdd()->lastInsertId(), $nom, $stock, $image);
             $this->ajoutRepas($repas);
         }
+    }
+
+    public function modificationRepasBD($id, $nom, $stock, $image)
+    {
+        $req = "
+        update repas 
+        set nom = :nom, stock = :stock, image = :image
+        where id = :id";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->bindValue(":nom", $nom, PDO::PARAM_STR);
+        $stmt->bindValue(":stock", $stock, PDO::PARAM_INT);
+        $stmt->bindValue(":image", $image, PDO::PARAM_STR);
+        $resultat = $stmt->execute();
+        $stmt->closeCursor();
     }
 }

@@ -19,12 +19,16 @@ class RepasController
         $repas = $this->repasManager->getRepasById($id);
         require "views/unRepas.views.php";
     }
+    public function supprimerRepas($id)
+    {
+        $this->repasManager->suppressionRepasBD($id);
+        header('Location: ' . URL . "repas");
+    }
 
     public function ajoutRepas()
     {
         require "views/ajoutRepas.view.php";
     }
-
 
     public function ajoutRepasValidation()
     {
@@ -34,6 +38,23 @@ class RepasController
         $this->repasManager->ajoutRepasBd($_POST['nom'], $_POST['stock'], $nomImageAjoute);
         header('Location: ' . URL . "repas");
     }
+
+    public function modificationRepasValidation($id)
+    {
+        $imageActuelle = $this->repasManager->getRepasById($id)->getImage();
+        $file = $_FILES['image'];
+
+        if ($file['size'] > 0) {
+            unlink("public/img/" . $imageActuelle);
+            $repertoire = "public/img/";
+            $nomImageToAdd = $this->ajoutImage($file, $repertoire);
+        } else {
+            $nomImageToAdd = $imageActuelle;
+        }
+        $this->repasManager->modificationRepasBD($id, $_POST['nom'], $_POST['stock'], $nomImageToAdd);
+        header('Location: ' . URL . "repas");
+    }
+
     private function ajoutImage($file, $dir)
     {
         if (!isset($file['name']) || empty($file['name'])) throw new Exception("Vous devez indiquer une image");

@@ -26,9 +26,9 @@ if (empty($_GET['page'])) {
             } else if ($url[1] === "ajoutValidation") {
                 $repasController->ajoutRepasValidation();
             } else if ($url[1] === "modifier") {
-                echo "modifier un repas";
+                $repasController->modificationRepasValidation($url[2]);
             } else if ($url[1] === "supprimer") {
-                echo "supprimer un repas" . $url[2];
+                $repasController->supprimerRepas($url[2]);
             }
             break;
     }

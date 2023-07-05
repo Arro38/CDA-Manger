@@ -16,13 +16,15 @@
                 <td><?= $repass[$i]->getNom() ?></td>
                 <td><?= $repass[$i]->getStock() ?></td>
                 <td>
-                    <a href="" class="btn btn-warning">Modifier</a>
-                    <a href="" class="btn btn-danger">Supprimer</a>
+                    <a href="<?= URL . "repas/voir/" . $repass[$i]->getId() ?>" class="btn btn-warning">Modifier</a>
+                    <a href="<?= URL . "repas/supprimer/" . $repass[$i]->getId() ?>" class="btn btn-danger">Supprimer</a>
                 </td>
             </tr>
         <?php } ?>
     </tbody>
 </table>
+<a href="<?= URL . "repas/ajouter/" ?>" class="btn btn-success">Ajouter</a>
+
 <?php $content = ob_get_clean();
 $titre = "Page Repas";
 require "template.php"; ?>
