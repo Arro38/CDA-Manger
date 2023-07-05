@@ -1,6 +1,7 @@
 <?php
-
-class RepasManager
+require_once "Model.class.php";
+require_once "Repas.class.php";
+class RepasManager extends Model
 {
     private $repass;
 
@@ -12,5 +13,17 @@ class RepasManager
     public function getRepass()
     {
         return $this->repass;
+    }
+
+    public function chargementRepas()
+    {
+        $req = $this->getBdd()->prepare("SELECT * FROM repas");
+        $req->execute();
+        $mesRepas = $req->fetchAll(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        foreach ($mesRepas as $repas) {
+            $r = new Repas($repas['id'], $repas['nom'], $repas['stock'], $repas['image']);
+            $this->ajoutRepas($r);
+        }
     }
 }

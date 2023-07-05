@@ -1,17 +1,8 @@
 <?php ob_start();
-require_once "Repas.class.php";
-$r1 = new Repas(1, "Pates", 100, "pates.jpg");
-$r2 = new Repas(2, "Coq", 200, "poulet.jpg");
-$r3 = new Repas(3, "Poisson", 300, "poisson.jpg");
-
 require_once "RepasManager.class.php";
 $repasManager = new RepasManager;
-$repasManager->ajoutRepas($r1);
-$repasManager->ajoutRepas($r2);
-$repasManager->ajoutRepas($r3);
-
+$mesrepas = $repasManager->chargementRepas();
 $repass = $repasManager->getRepass();
-
 ?>
 <table class="table table-hover text-center align-middle">
     <thead>
