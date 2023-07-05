@@ -1,8 +1,4 @@
 <?php ob_start();
-require_once "RepasManager.class.php";
-$repasManager = new RepasManager;
-$mesrepas = $repasManager->chargementRepas();
-$repass = $repasManager->getRepass();
 ?>
 <table class="table table-hover text-center align-middle">
     <thead>
