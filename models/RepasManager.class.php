@@ -26,4 +26,13 @@ class RepasManager extends Model
             $this->ajoutRepas($r);
         }
     }
+
+    public function getRepasById($id)
+    {
+        for ($i = 0; $i < count($this->repass); $i++) {
+            if ($this->repass[$i]->getId() === $id) {
+                return $this->repass[$i];
+            }
+        }
+    }
 }

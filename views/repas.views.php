@@ -12,7 +12,7 @@
     <tbody>
         <?php for ($i = 0; $i < count($repass); $i++) { ?>
             <tr class="table-dark">
-                <th scope="row"><img src="public/img/<?= $repass[$i]->getImage() ?>" width="60px" /> </th>
+                <th scope="row"><img src="/CDA-MANGER/public/img/<?= $repass[$i]->getImage() ?>" width="60px" /> </th>
                 <td><?= $repass[$i]->getNom() ?></td>
                 <td><?= $repass[$i]->getStock() ?></td>
                 <td>

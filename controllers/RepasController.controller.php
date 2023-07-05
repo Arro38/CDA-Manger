@@ -13,4 +13,10 @@ class RepasController
         $repass = $this->repasManager->getRepass();
         require "views/repas.views.php";
     }
+
+    public function afficherUnRepas($id)
+    {
+        $repas = $this->repasManager->getRepasById($id);
+        require "views/unRepas.views.php";
+    }
 }
